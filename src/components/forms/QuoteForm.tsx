@@ -25,12 +25,12 @@ const schema = z.object({
   property_kind: z.enum(["home", "business"]),
   property_type: z.string().trim().min(1, "Please select a property type").max(100),
   service_needed: z.string().trim().min(1, "Please select a service").max(100),
-  camera_count: z.string().trim().max(20).optional().default(""),
-  needs_remote_monitoring: z.boolean().default(false),
-  needs_networking: z.boolean().default(false),
-  needs_access_control: z.boolean().default(false),
+  camera_count: z.string().trim().max(20),
+  needs_remote_monitoring: z.boolean(),
+  needs_networking: z.boolean(),
+  needs_access_control: z.boolean(),
   city: z.string().trim().min(2, "Please enter your city").max(100),
-  message: z.string().trim().max(2000).optional().default(""),
+  message: z.string().trim().max(2000),
 });
 
 type FormValues = z.infer<typeof schema>;
