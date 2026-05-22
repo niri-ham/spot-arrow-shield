@@ -1,36 +1,38 @@
 import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X, Radar } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getCompanyLogo } from "@/data/companyLogo";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "About Us" },
   { to: "/services", label: "Services" },
   { to: "/gallery", label: "Gallery" },
-  { to: "/testimonials", label: "Testimonials" },
-  { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Contact Us" },
 ] as const;
+
+const PHONE_TEL = "+18633987761";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const logo = getCompanyLogo();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          {/* TODO(Lovable Cloud): swap mark for getCompanyLogo().image_url when uploaded */}
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-md bg-gradient-primary shadow-glow">
-            <Radar className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
-          </div>
-          <div className="flex flex-col leading-none">
+        <Link to="/" className="flex items-center gap-3 group">
+          {logo.image_url ? (
+            <img
+              src={logo.image_url}
+              alt={logo.alt}
+              className="h-10 w-auto object-contain drop-shadow-[0_0_12px_rgba(91,160,255,0.25)]"
+            />
+          ) : (
             <span className="font-display text-lg font-bold tracking-tight">Spot Arrow</span>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Security · Networking
-            </span>
-          </div>
+          )}
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -55,8 +57,14 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" className="hidden sm:inline-flex bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold shadow-glow">
-            <Link to="/contact">Request a Quote</Link>
+          <Button
+            asChild
+            size="sm"
+            className="hidden sm:inline-flex bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold shadow-glow"
+          >
+            <a href={`tel:${PHONE_TEL}`}>
+              <Phone className="mr-1.5 h-3.5 w-3.5" /> Call Now
+            </a>
           </Button>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -86,8 +94,13 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <Button asChild className="mt-2 bg-gradient-primary text-primary-foreground font-semibold">
-              <Link to="/contact" onClick={() => setOpen(false)}>Request a Quote</Link>
+            <Button
+              asChild
+              className="mt-2 bg-gradient-primary text-primary-foreground font-semibold"
+            >
+              <a href={`tel:${PHONE_TEL}`} onClick={() => setOpen(false)}>
+                <Phone className="mr-1.5 h-3.5 w-3.5" /> Call Now
+              </a>
             </Button>
           </nav>
         </div>

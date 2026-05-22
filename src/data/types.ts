@@ -8,26 +8,15 @@ export type GalleryCategory =
   | "networking"
   | "access-control"
   | "cabling"
-  | "commercial"
-  | "residential";
+  | "installations"
+  | "equipment";
 
 export interface GalleryImage {
   id: string;
-  image_url: string;
-  alt: string;
+  title: string;
   category: GalleryCategory;
-  caption?: string;
-  created_at: string;
-}
-
-export interface Testimonial {
-  id: string;
-  name: string;
-  location?: string;
-  role?: string;
-  quote: string;
-  rating: number; // 1-5
-  photo_url: string;
+  image_url: string; // permanent URL (Supabase Storage public URL when wired)
+  alt_text: string;
   created_at: string;
 }
 
@@ -57,7 +46,7 @@ export interface Product {
 
 export interface CompanyLogo {
   id: string;
-  image_url: string | null; // null → render text logo
+  image_url: string | null;
   alt: string;
 }
 
@@ -66,12 +55,7 @@ export interface ContactSubmission {
   email: string;
   phone: string;
   property_kind: "home" | "business";
-  property_type: string;
   service_needed: string;
-  camera_count: string;
-  needs_remote_monitoring: boolean;
-  needs_networking: boolean;
-  needs_access_control: boolean;
   city: string;
   message: string;
 }

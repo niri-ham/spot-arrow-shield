@@ -1,19 +1,14 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface CTASectionProps {
   title?: string;
   subtitle?: string;
-  primaryLabel?: string;
-  primaryTo?: string;
 }
 
 export function CTASection({
-  title = "Ready to protect your property?",
-  subtitle = "Request a quote today — we'll design a custom system built for your space.",
-  primaryLabel = "Request a Quote",
-  primaryTo = "/contact",
+  title = "Let's talk about your property.",
+  subtitle = "Call us to learn more about security cameras, networking, access control, and structured cabling in Orlando, FL.",
 }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden">
@@ -27,12 +22,18 @@ export function CTASection({
               </h2>
               <p className="mt-3 text-muted-foreground text-lg max-w-2xl">{subtitle}</p>
             </div>
-            <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground font-semibold shadow-glow">
-              <Link to={primaryTo}>
-                {primaryLabel}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground font-semibold shadow-glow">
+                <a href="tel:+18633987761">
+                  <Phone className="mr-2 h-4 w-4" /> Call 863-398-7761
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-border">
+                <a href="mailto:contact@spotarrowllc.com">
+                  <Mail className="mr-2 h-4 w-4" /> Email Us
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

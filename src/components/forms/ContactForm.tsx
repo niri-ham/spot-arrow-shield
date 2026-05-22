@@ -14,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { ContactSubmission } from "@/data/types";
 
@@ -23,40 +22,26 @@ const schema = z.object({
   email: z.string().trim().email("Invalid email address").max(255),
   phone: z.string().trim().min(7, "Please enter a valid phone number").max(30),
   property_kind: z.enum(["home", "business"]),
-  property_type: z.string().trim().min(1, "Please select a property type").max(100),
   service_needed: z.string().trim().min(1, "Please select a service").max(100),
-  camera_count: z.string().trim().max(20),
-  needs_remote_monitoring: z.boolean(),
-  needs_networking: z.boolean(),
-  needs_access_control: z.boolean(),
   city: z.string().trim().min(2, "Please enter your city").max(100),
   message: z.string().trim().max(2000),
 });
 
 type FormValues = z.infer<typeof schema>;
 
-const PROPERTY_TYPES = [
-  "Single-family home",
-  "Apartment / Condo",
-  "Office",
-  "Retail store",
-  "Warehouse",
-  "Restaurant",
-  "Other commercial",
-];
-
 const SERVICES = [
-  "Video surveillance",
-  "Remote monitoring",
-  "Network / Wi-Fi",
-  "Access control",
+  "Security camera installation",
+  "Remote monitoring setup",
+  "Camera maintenance and technical support",
+  "Network design and installation",
+  "Network optimization and security",
+  "Access control system installation",
   "Structured cabling",
   "Systems integration",
-  "Maintenance & support",
-  "Not sure — recommend best fit",
+  "Other",
 ];
 
-export function QuoteForm() {
+export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
   const form = useForm<FormValues>({
@@ -66,22 +51,17 @@ export function QuoteForm() {
       email: "",
       phone: "",
       property_kind: "home",
-      property_type: "",
       service_needed: "",
-      camera_count: "",
-      needs_remote_monitoring: false,
-      needs_networking: false,
-      needs_access_control: false,
       city: "",
       message: "",
     },
   });
 
   const onSubmit = async (values: FormValues) => {
-    const submission: ContactSubmission = values as ContactSubmission;
+    const submission: ContactSubmission = values;
     // TODO(Lovable Cloud): persist to supabase.from("contact_submissions").insert(submission)
     // Optionally trigger an email notification via a server function.
-    console.log("[QuoteForm] submission (mock)", submission);
+    console.log("[ContactForm] submission (mock)", submission);
     await new Promise((r) => setTimeout(r, 600));
     setSubmitted(true);
   };
@@ -92,7 +72,7 @@ export function QuoteForm() {
         <CheckCircle2 className="mx-auto h-12 w-12 text-primary" />
         <h3 className="mt-4 font-display text-2xl font-semibold">Thanks — we got it.</h3>
         <p className="mt-2 text-muted-foreground">
-          A Spot Arrow specialist will reach out within one business day to discuss your project.
+          A Spot Arrow specialist will reach out within one business day.
         </p>
       </div>
     );
@@ -114,10 +94,10 @@ export function QuoteForm() {
           <Input type="email" {...register("email")} placeholder="you@example.com" />
         </Field>
         <Field label="Phone number" error={errors.phone?.message}>
-          <Input type="tel" {...register("phone")} placeholder="(555) 000-0000" />
+          <Input type="tel" {...register("phone")} placeholder="863-398-7761" />
         </Field>
         <Field label="City / service location" error={errors.city?.message}>
-          <Input {...register("city")} placeholder="City, State" />
+          <Input {...register("city")} placeholder="Orlando, FL" />
         </Field>
       </div>
 
@@ -136,60 +116,23 @@ export function QuoteForm() {
         </RadioGroup>
       </Field>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Field label="Property type" error={errors.property_type?.message}>
-          <Select
-            value={watch("property_type")}
-            onValueChange={(v) => setValue("property_type", v, { shouldValidate: true })}
-          >
-            <SelectTrigger><SelectValue placeholder="Select property type" /></SelectTrigger>
-            <SelectContent>
-              {PROPERTY_TYPES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
-            </SelectContent>
-          </Select>
-        </Field>
-        <Field label="Service needed" error={errors.service_needed?.message}>
-          <Select
-            value={watch("service_needed")}
-            onValueChange={(v) => setValue("service_needed", v, { shouldValidate: true })}
-          >
-            <SelectTrigger><SelectValue placeholder="Select a service" /></SelectTrigger>
-            <SelectContent>
-              {SERVICES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
-            </SelectContent>
-          </Select>
-        </Field>
-        <Field label="Approximate number of cameras">
-          <Input {...register("camera_count")} placeholder="e.g. 4–8, or N/A" />
-        </Field>
-      </div>
+      <Field label="Service needed" error={errors.service_needed?.message}>
+        <Select
+          value={watch("service_needed")}
+          onValueChange={(v) => setValue("service_needed", v, { shouldValidate: true })}
+        >
+          <SelectTrigger><SelectValue placeholder="Select a service" /></SelectTrigger>
+          <SelectContent>
+            {SERVICES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      </Field>
 
-      <fieldset className="space-y-3">
-        <legend className="text-sm font-medium mb-1">Additional needs (check all that apply)</legend>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <CheckRow
-            label="Remote monitoring"
-            checked={watch("needs_remote_monitoring")}
-            onChange={(v) => setValue("needs_remote_monitoring", v)}
-          />
-          <CheckRow
-            label="Networking / Wi-Fi"
-            checked={watch("needs_networking")}
-            onChange={(v) => setValue("needs_networking", v)}
-          />
-          <CheckRow
-            label="Access control"
-            checked={watch("needs_access_control")}
-            onChange={(v) => setValue("needs_access_control", v)}
-          />
-        </div>
-      </fieldset>
-
-      <Field label="Project details">
+      <Field label="Message">
         <Textarea
           rows={5}
           {...register("message")}
-          placeholder="Tell us about your property, current setup, timeline, or any specific concerns…"
+          placeholder="Tell us a bit about your property and what you're looking for…"
         />
       </Field>
 
@@ -202,7 +145,7 @@ export function QuoteForm() {
         {isSubmitting ? (
           <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending…</>
         ) : (
-          <><Send className="mr-2 h-4 w-4" /> Request My Quote</>
+          <><Send className="mr-2 h-4 w-4" /> Send Message</>
         )}
       </Button>
       <p className="text-xs text-muted-foreground text-center">
@@ -227,22 +170,5 @@ function Field({
       {children}
       {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
-  );
-}
-
-function CheckRow({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="flex items-center gap-2.5 rounded-md border border-border bg-background/40 px-3 py-2.5 cursor-pointer hover:border-primary/40 transition-colors">
-      <Checkbox checked={checked} onCheckedChange={(v) => onChange(Boolean(v))} />
-      <span className="text-sm">{label}</span>
-    </label>
   );
 }
