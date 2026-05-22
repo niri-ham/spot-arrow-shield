@@ -13,13 +13,13 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Video surveillance installation, remote monitoring, network design, access control, structured cabling, and systems integration for homes and businesses.",
+          "Video surveillance installation, remote monitoring, network design, access control, structured cabling, and systems integration for homes and businesses in Orlando, FL.",
       },
       { property: "og:title", content: "Spot Arrow Services" },
-      { property: "og:description", content: "Full-service security and networking installation and support." },
-      { property: "og:url", content: "/services" },
+      { property: "og:description", content: "Full-service security and networking installation and support in Orlando, FL." },
+      { property: "og:url", content: "https://spot-arrow-shield.lovable.app/services" },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: "https://spot-arrow-shield.lovable.app/services" }],
   }),
 });
 
@@ -77,7 +77,7 @@ function ServicesPage() {
 
       <CTASection
         title="Not sure which services you need?"
-        subtitle="Tell us about your property — we'll recommend the right system."
+        subtitle="Contact Spot Arrow for security and networking solutions tailored to your property in Orlando, FL."
       />
     </>
   );

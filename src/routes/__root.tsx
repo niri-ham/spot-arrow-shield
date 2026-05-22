@@ -71,24 +71,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Spot Arrow — Security Cameras, Networking & Access Control" },
-      {
-        name: "description",
-        content:
-          "Spot Arrow designs, installs, and supports customizable video surveillance, access control, structured cabling, and business networking for homes and businesses.",
-      },
       { name: "author", content: "Spot Arrow" },
       { name: "theme-color", content: "#0a1424" },
       { property: "og:site_name", content: "Spot Arrow" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Spot Arrow — Security Cameras, Networking & Access Control" },
-      { name: "twitter:title", content: "Spot Arrow — Security Cameras, Networking & Access Control" },
-      { name: "description", content: "Spot Arrow offers custom security camera, access control, and networking solutions for homes and businesses." },
-      { property: "og:description", content: "Spot Arrow offers custom security camera, access control, and networking solutions for homes and businesses." },
-      { name: "twitter:description", content: "Spot Arrow offers custom security camera, access control, and networking solutions for homes and businesses." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1d45cbcc-83bf-4d10-925c-bb6fdc2d42fb/id-preview-b6204096--333b1b92-c771-4247-abaf-d0b31e04f7dd.lovable.app-1779164822178.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1d45cbcc-83bf-4d10-925c-bb6fdc2d42fb/id-preview-b6204096--333b1b92-c771-4247-abaf-d0b31e04f7dd.lovable.app-1779164822178.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -105,8 +92,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "Spot Arrow",
           description:
-            "Customizable security cameras, video surveillance, access control, structured cabling, and business networking for homes and commercial spaces.",
-          areaServed: "Local",
+            "Customizable security cameras, video surveillance, access control, structured cabling, and business networking for homes and commercial spaces in Orlando, FL.",
+          telephone: "+1-863-398-7761",
+          email: ["contact@spotarrowllc.com", "vpatel7761@gmail.com"],
+          areaServed: "Orlando, FL",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Orlando",
+            addressRegion: "FL",
+            addressCountry: "US",
+          },
         }),
       },
     ],

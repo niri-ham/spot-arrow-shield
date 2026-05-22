@@ -3,22 +3,23 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { FeatureCard } from "@/components/cards/FeatureCard";
 import { CTASection } from "@/components/sections/CTASection";
 import { getCompanyPhotos } from "@/data/companyPhotos";
+import vasantPhoto from "@/assets/vasant-patel.jpeg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About Spot Arrow — Custom Security & Networking" },
+      { title: "About Spot Arrow — Custom Security & Networking in Orlando, FL" },
       {
         name: "description",
         content:
-          "Spot Arrow makes modern security and networking simple, reliable, and accessible. Customizable systems built around real-world protection and long-term reliability.",
+          "Spot Arrow makes modern security and networking simple, reliable, and accessible for homes and businesses in Orlando, FL. Led by President Vasant Patel.",
       },
       { property: "og:title", content: "About Spot Arrow" },
-      { property: "og:description", content: "Custom security and networking, designed and supported end to end." },
-      { property: "og:url", content: "/about" },
+      { property: "og:description", content: "Custom security and networking, designed and supported end to end in Orlando, FL." },
+      { property: "og:url", content: "https://spot-arrow-shield.lovable.app/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://spot-arrow-shield.lovable.app/about" }],
   }),
 });
 
@@ -41,7 +42,7 @@ function AboutPage() {
           </h1>
           <p className="mt-6 max-w-3xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             We make modern protection simple, reliable, and accessible — for homes, offices,
-            warehouses, retail, and everything in between.
+            warehouses, retail, and everything in between across Orlando, FL.
           </p>
         </div>
       </section>
@@ -85,7 +86,32 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Leadership */}
       <section className="bg-surface/40 border-y border-border">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+          <SectionHeading eyebrow="Leadership" title="Meet our president." />
+          <div className="mt-12 flex justify-center">
+            <div className="relative w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-card shadow-elevated">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img
+                  src={vasantPhoto}
+                  alt="Vasant Patel, President of Spot Arrow"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">President</p>
+                <h3 className="mt-2 font-display text-2xl font-bold">Vasant Patel</h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Leading Spot Arrow's security and networking work across Orlando, FL.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <SectionHeading eyebrow="How we work" title="The Spot Arrow standard." />
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -95,8 +121,8 @@ function AboutPage() {
       </section>
 
       <CTASection
-        title="Let's design your system."
-        subtitle="Tell us about your property and goals — we'll handle the rest."
+        title="Reach out for more information."
+        subtitle="Call us to learn how we can design a security and networking system around your property."
       />
     </>
   );

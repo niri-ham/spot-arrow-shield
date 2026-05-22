@@ -1,31 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Cpu, Eye, Cable, KeyRound, Wrench, Home, Building2, Wifi, Smartphone } from "lucide-react";
+import { ArrowRight, ShieldCheck, Cpu, Eye, Cable, KeyRound, Wrench, Home, Building2, Wifi, Smartphone, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FeatureCard } from "@/components/cards/FeatureCard";
-import { TestimonialCard } from "@/components/cards/TestimonialCard";
-import { CTASection } from "@/components/sections/CTASection";
-import { getTestimonials } from "@/data/testimonials";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "Spot Arrow — Modern Security & Networking Built for Peace of Mind" },
+      { title: "Spot Arrow — Security Cameras & Networking in Orlando, FL" },
       {
         name: "description",
         content:
-          "Custom video surveillance, AI-capable cameras, access control, structured cabling, and business networking for homes and commercial properties. Request a quote today.",
+          "Spot Arrow installs and supports customizable security cameras, AI surveillance, access control, structured cabling, and business networking in Orlando, FL.",
       },
-      { property: "og:title", content: "Spot Arrow — Security Cameras & Networking" },
+      { property: "og:title", content: "Spot Arrow — Security & Networking in Orlando, FL" },
       {
         property: "og:description",
         content:
-          "Design, install, and support for video surveillance, access control, and business networking.",
+          "Design, installation, and support for video surveillance, access control, and business networking.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://spot-arrow-shield.lovable.app/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://spot-arrow-shield.lovable.app/" }],
   }),
 });
 
@@ -57,8 +54,6 @@ const TRUST_BADGES = [
 ];
 
 function HomePage() {
-  const testimonials = getTestimonials();
-
   return (
     <>
       {/* HERO */}
@@ -69,7 +64,7 @@ function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-24 md:pt-28 md:pb-32">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Security · Networking · Access Control
+            Security · Networking · Access Control · Orlando, FL
           </div>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance max-w-4xl leading-[1.05]">
             Modern Security and Networking{" "}
@@ -79,18 +74,18 @@ function HomePage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             Spot Arrow designs, sells, installs, and supports customizable video surveillance,
-            access control, and business networking systems for homes and commercial spaces.
+            access control, and business networking systems for homes and commercial spaces in
+            Orlando, FL.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground font-semibold shadow-glow">
-              <Link to="/contact">Request a Quote <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <a href="tel:+18633987761"><Phone className="mr-2 h-4 w-4" /> Call 863-398-7761</a>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-border">
-              <Link to="/services">View Our Services</Link>
+              <Link to="/services">View Our Services <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
           </div>
 
-          {/* Trust badges row */}
           <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {TRUST_BADGES.map((b) => (
               <div key={b.label} className="flex items-center gap-2 rounded-lg border border-border/60 bg-card/40 backdrop-blur px-3 py-2.5">
@@ -167,22 +162,43 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials teaser */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <SectionHeading eyebrow="What clients say" title="Real installs. Real protection." />
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.id} testimonial={t} />
-          ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <Button asChild variant="outline" className="border-border">
-            <Link to="/testimonials">Read more testimonials</Link>
-          </Button>
+      {/* Contact section (replaces quote band) */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-surface p-10 md:p-16 shadow-elevated">
+            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+            <div className="relative max-w-4xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">Get in touch</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-balance">
+                Speak with us about your property's needs.
+              </h2>
+              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+                Call{" "}
+                <a href="tel:+18633987761" className="text-foreground font-semibold hover:text-primary transition-colors">
+                  863 398 7761
+                </a>{" "}
+                or email{" "}
+                <a href="mailto:contact@spotarrowllc.com" className="text-foreground font-semibold hover:text-primary transition-colors break-all">
+                  contact@spotarrowllc.com
+                </a>{" "}
+                to learn more about security camera installation, remote monitoring,
+                networking, access control, and structured cabling services in Orlando, FL.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground font-semibold shadow-glow">
+                  <a href="tel:+18633987761"><Phone className="mr-2 h-4 w-4" /> Call Now</a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-border">
+                  <a href="mailto:contact@spotarrowllc.com"><Mail className="mr-2 h-4 w-4" /> Email Us</a>
+                </Button>
+                <Button asChild size="lg" variant="ghost">
+                  <Link to="/contact">Contact form <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
